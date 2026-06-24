@@ -1208,48 +1208,174 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 52px;
-    max-width: 1100px;
+    gap: 40px;
+    max-width: 500px;
     width: 100%;
   }
 
-  .revenda-header { text-align: center; max-width: 620px; }
+  .revenda-header { text-align: center; max-width: 500px; }
   .revenda-header .section-body { color: rgba(253,250,245,0.82); }
 
+  /* grid 2x2 + 1 largo */
   .revenda-cards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
     width: 100%;
   }
 
   .revenda-card {
-    background: rgba(253,250,245,0.08);
-    border: 1px solid rgba(253,250,245,0.16);
+    aspect-ratio: 1;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 4px;
-    padding: clamp(24px, 3vw, 40px);
-    backdrop-filter: blur(8px);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s, border-color 0.3s;
+    cursor: default;
   }
 
-  .revenda-card-icon {
-    font-size: 32px;
-    margin-bottom: 16px;
-    display: block;
+  /* card largo — 3º ocupa 2 colunas */
+  .revenda-card:last-child {
+    grid-column: 1 / -1;
+    aspect-ratio: auto;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    padding: 28px 24px;
+  }
+
+  /* cantos dourados no hover */
+  .revenda-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 36px; height: 36px;
+    border-top: 2px solid var(--dourado);
+    border-left: 2px solid var(--dourado);
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+
+  .revenda-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 36px; height: 36px;
+    border-bottom: 2px solid var(--dourado);
+    border-right: 2px solid var(--dourado);
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+
+  .revenda-card:hover::before,
+  .revenda-card:hover::after { opacity: 1; }
+  .revenda-card:hover { background: rgba(201,168,76,0.05); border-color: rgba(255,255,255,0.12); }
+
+  /* shimmer no hover */
+  .revenda-card .revenda-shimmer {
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.06), transparent);
+    transition: left 0.6s ease;
+    pointer-events: none;
+  }
+  .revenda-card:hover .revenda-shimmer { left: 150%; }
+
+  .revenda-card-top {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .revenda-card:last-child .revenda-card-top {
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+  }
+
+  .revenda-icon-wrap {
+    width: 44px; height: 44px;
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .revenda-icon-wrap svg {
+    width: 22px; height: 22px;
+    stroke: var(--dourado);
+    fill: none;
+    stroke-width: 1.5;
   }
 
   .revenda-card-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(17px, 1.8vw, 22px);
+    font-size: 12px;
     font-weight: 700;
-    color: var(--dourado);
-    margin-bottom: 12px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--branco);
+    line-height: 1.3;
+  }
+
+  .revenda-card-bar {
+    width: 24px; height: 2px;
+    background: var(--dourado);
+    opacity: 0.6;
+    flex-shrink: 0;
+    display: none;
   }
 
   .revenda-card-desc {
-    font-size: 14px;
-    color: rgba(253,250,245,0.78);
+    font-size: 12px;
+    color: rgba(253,250,245,0.45);
     line-height: 1.7;
   }
+
+  .revenda-card:last-child .revenda-card-desc { flex: 1; }
+
+  /* botão fill animado */
+  .btn-revenda {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.5);
+    color: var(--dourado);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border-radius: 2px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s;
+  }
+
+  .btn-revenda::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--dourado);
+    transform: translateX(-101%);
+    transition: transform 0.3s ease;
+    z-index: 0;
+  }
+
+  .btn-revenda:hover::before { transform: translateX(0); }
+  .btn-revenda:hover { color: #0a0a0a; }
+  .btn-revenda span { position: relative; z-index: 1; }
 
   /* ─── DIFERENCIAIS ──────────────────────────────────────── */
   #diferenciais {
@@ -2393,23 +2519,47 @@
       </div>
     </div>
     <div class="revenda-cards">
+
+      <!-- Card 01 -->
       <div class="revenda-card" data-reveal>
-        <span class="revenda-card-icon">📦</span>
-        <div class="revenda-card-title">Fácil de Estoque</div>
-        <p class="revenda-card-desc">Seladas a vácuo e congeladas, as pizzas duram até 3 meses. Ideal para manter no freezer sem desperdício.</p>
+        <div class="revenda-shimmer"></div>
+        <div class="revenda-card-top">
+          <div class="revenda-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
+          <div class="revenda-card-title">Fácil de<br>Estoque</div>
+        </div>
+        <p class="revenda-card-desc">Duram até 3 meses no freezer. Sem desperdício, sem complicação.</p>
       </div>
+
+      <!-- Card 02 -->
       <div class="revenda-card" data-reveal data-reveal-delay="1">
-        <span class="revenda-card-icon">💰</span>
-        <div class="revenda-card-title">Margem Atrativa</div>
-        <p class="revenda-card-desc">Produto premium com alto valor percebido. Excelente oportunidade de lucro para revendedores e pequenos negócios.</p>
+        <div class="revenda-shimmer"></div>
+        <div class="revenda-card-top">
+          <div class="revenda-icon-wrap">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <div class="revenda-card-title">Margem<br>Atrativa</div>
+        </div>
+        <p class="revenda-card-desc">Alto valor percebido e excelente margem de lucro garantida.</p>
       </div>
+
+      <!-- Card 03 — largo -->
       <div class="revenda-card" data-reveal data-reveal-delay="2">
-        <span class="revenda-card-icon">🤝</span>
-        <div class="revenda-card-title">Suporte Completo</div>
-        <p class="revenda-card-desc">Acompanhamento direto, materiais de divulgação e suporte para você vender mais com menos esforço.</p>
+        <div class="revenda-shimmer"></div>
+        <div class="revenda-card-top">
+          <div class="revenda-icon-wrap">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="revenda-card-title">Suporte Completo</div>
+        </div>
+        <p class="revenda-card-desc">Materiais de divulgação e acompanhamento direto para você vender mais com menos esforço.</p>
       </div>
+
     </div>
-    <a href="#cta" class="btn-primary" data-reveal>Quero ser revendedor →</a>
+    <a href="https://wa.me" class="btn-revenda" target="_blank" rel="noopener" data-reveal>
+      <span>Quero ser revendedor →</span>
+    </a>
   </div>
 </section>
 
