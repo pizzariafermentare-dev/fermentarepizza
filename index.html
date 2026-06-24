@@ -1,0 +1,2685 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fermentare Pizzas – Fermentação Natural • Pizzas Congeladas</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #2d5a27;
+    --verde-escuro: #1e3d1a;
+    --vermelho: #8b1a1a;
+    --vermelho-claro: #a52020;
+    --creme: #f5f0e8;
+    --creme-escuro: #e8e0d0;
+    --dourado: #c9a84c;
+    --branco: #fdfaf5;
+    --texto-escuro: #1a1a1a;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--creme);
+    color: var(--texto-escuro);
+    overflow-x: hidden;
+    max-width: 100vw;
+    width: 100%;
+  }
+
+  /* ─── CLASSE GLOBAL FULLSCREEN ─────────────────────────── */
+  .section-fullscreen {
+    position: relative;
+    width: 100%;
+    max-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(80px, 10vw, 120px) clamp(24px, 5vw, 80px) clamp(60px, 8vw, 100px);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+  }
+
+  /* overlay padrão para legibilidade sobre imagens */
+  .section-fullscreen::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .section-fullscreen > * {
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+  }
+
+  /* garante que nenhum elemento filho vaze horizontalmente */
+  .section-fullscreen * {
+    max-width: 100%;
+  }
+
+  /* ─── NAV ───────────────────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px clamp(20px, 5vw, 60px);
+    background: rgba(253,250,245,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(45,90,39,0.12);
+    max-width: 100vw;
+    overflow: hidden;
+  }
+
+  .nav-logo {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(14px, 2vw, 18px);
+    font-weight: 700;
+    color: var(--verde-escuro);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--vermelho); }
+
+  .nav-links {
+    display: flex;
+    gap: clamp(16px, 3vw, 36px);
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--verde-escuro);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--vermelho); }
+
+  .nav-cta {
+    background: var(--verde);
+    color: var(--branco) !important;
+    padding: 9px 20px;
+    border-radius: 4px;
+  }
+
+  .nav-cta:hover { background: var(--verde-escuro); color: var(--branco) !important; }
+
+  /* ─── HERO ──────────────────────────────────────────────── */
+  #hero {
+    background-image:
+      linear-gradient(to bottom, rgba(20,40,18,0.55) 0%, rgba(20,40,18,0.70) 100%),
+      url('images/hero-forno.webp');
+    background-position: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0;
+  }
+
+  .hero-inner {
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* eyebrow com traços laterais */
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: rgba(253,250,245,0.75);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .hero-eyebrow-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(253,250,245,0.35);
+    max-width: 48px;
+  }
+
+  /* título principal */
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 8vw, 80px);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--branco);
+    margin-bottom: 0;
+  }
+
+  /* linha itálica dourada */
+  .hero-title-italic {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 7.5vw, 76px);
+    font-weight: 700;
+    font-style: italic;
+    color: var(--dourado);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  /* separador losangos */
+  .hero-diamonds {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 20px 0 28px;
+  }
+
+  .hero-diamonds-line {
+    width: 36px;
+    height: 1px;
+    background: var(--vermelho);
+  }
+
+  .hero-diamond {
+    width: 8px;
+    height: 8px;
+    background: var(--vermelho);
+    transform: rotate(45deg);
+  }
+
+  .hero-diamond.small {
+    width: 6px;
+    height: 6px;
+  }
+
+  /* subtítulo */
+  .hero-sub {
+    font-size: clamp(15px, 2vw, 18px);
+    font-weight: 300;
+    color: rgba(253,250,245,0.85);
+    line-height: 1.7;
+    max-width: 420px;
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  /* botões hero */
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 380px;
+  }
+
+  .btn-whatsapp-hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: var(--dourado);
+    color: #1a1000;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 18px 32px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-whatsapp-hero:hover { background: #d4b455; transform: translateY(-2px); }
+
+  .btn-revendedor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--branco);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 16px 32px;
+    border-radius: 100px;
+    border: 1px solid rgba(253,250,245,0.45);
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .btn-revendedor:hover { border-color: var(--branco); background: rgba(253,250,245,0.08); }
+
+  /* chips de atributos */
+  .hero-chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 24px;
+    max-width: 420px;
+  }
+
+  .hero-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(253,250,245,0.10);
+    border: 1px solid rgba(253,250,245,0.25);
+    color: rgba(253,250,245,0.90);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: 100px;
+    backdrop-filter: blur(6px);
+  }
+
+  .hero-chip-icon { font-size: 13px; }
+
+  /* rodapé do hero — localização */
+  .hero-location {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(253,250,245,0.60);
+    font-size: 13px;
+    font-weight: 400;
+    white-space: nowrap;
+    z-index: 2;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .hero-location:hover { color: var(--dourado); }
+
+  /* botões genéricos mantidos para outras seções */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--vermelho);
+    color: var(--branco);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 16px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--vermelho-claro); transform: translateY(-1px); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--branco);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 16px 32px;
+    border-radius: 4px;
+    border: 1px solid rgba(253,250,245,0.4);
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: var(--branco); background: rgba(253,250,245,0.08); }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  /* ─── MANIFESTO ─────────────────────────────────────────── */
+  #manifesto {
+    background-image:
+      linear-gradient(to bottom, rgba(18,32,16,0.82) 0%, rgba(18,32,16,0.75) 100%),
+      url('images/manifesto-massa.webp');
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .manifesto-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    max-width: 640px;
+    width: 100%;
+  }
+
+  /* eyebrow com traços — igual ao hero */
+  .manifesto-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--dourado);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+  }
+
+  .manifesto-eyebrow-line {
+    width: 32px;
+    height: 1px;
+    background: var(--dourado);
+    opacity: 0.6;
+  }
+
+  /* separador losangos — vermelho, igual ao hero */
+  .manifesto-diamonds {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .manifesto-diamonds-line {
+    flex: 1;
+    max-width: 100%;
+    height: 1px;
+    background: var(--vermelho);
+  }
+
+  .manifesto-diamond {
+    width: 8px; height: 8px;
+    background: var(--vermelho);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  .manifesto-diamond.sm { width: 6px; height: 6px; }
+
+  /* título */
+  .manifesto-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--branco);
+  }
+
+  .manifesto-title em {
+    font-style: italic;
+    color: var(--dourado);
+    display: block;
+  }
+
+  /* parágrafo */
+  .manifesto-body {
+    font-size: clamp(14px, 1.6vw, 17px);
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(253,250,245,0.75);
+  }
+
+  /* lista numerada */
+  .manifesto-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .manifesto-item {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 0 16px;
+    align-items: start;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(201,168,76,0.20);
+  }
+
+  .manifesto-item:last-child { border-bottom: none; }
+
+  .manifesto-num {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 52px);
+    font-weight: 700;
+    color: rgba(201,168,76,0.18);
+    line-height: 1;
+    user-select: none;
+  }
+
+  .manifesto-item-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(16px, 1.8vw, 20px);
+    font-weight: 700;
+    color: var(--dourado);
+    margin-bottom: 4px;
+  }
+
+  .manifesto-item-desc {
+    font-size: clamp(13px, 1.3vw, 15px);
+    color: rgba(253,250,245,0.65);
+    line-height: 1.6;
+  }
+
+  /* rodapé quote */
+  .manifesto-footer-quote {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(253,250,245,0.07);
+    border: 1px solid rgba(253,250,245,0.12);
+    border-radius: 6px;
+    padding: 18px 22px;
+    backdrop-filter: blur(8px);
+  }
+
+  .manifesto-footer-dot {
+    width: 10px; height: 10px;
+    min-width: 10px;
+    background: var(--dourado);
+    border-radius: 50%;
+  }
+
+  .manifesto-footer-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(14px, 1.5vw, 17px);
+    color: rgba(253,250,245,0.85);
+    line-height: 1.5;
+  }
+
+  /* classes genéricas mantidas */
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--vermelho);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--verde-escuro);
+    margin-bottom: 24px;
+  }
+
+  .section-title span { color: var(--vermelho); }
+
+  .section-body {
+    font-size: clamp(14px, 1.5vw, 17px);
+    font-weight: 400;
+    line-height: 1.8;
+    color: #3a3a3a;
+    margin-bottom: 20px;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 900;
+    color: var(--verde);
+    display: block;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #666;
+  }
+
+  /* ─── PROCESSO ──────────────────────────────────────────── */
+  #processo {
+    background-color: var(--verde-escuro);
+    background-image: url('images/processo-brasa.webp');
+    background-blend-mode: multiply;
+    flex-direction: column;
+  }
+
+  .processo-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    max-width: 860px;
+    width: 100%;
+  }
+
+  .processo-header { text-align: center; }
+
+  /* eyebrow com traços */
+  .processo-eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: var(--dourado);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .processo-eyebrow-line {
+    width: 32px; height: 1px;
+    background: var(--dourado);
+    opacity: 0.6;
+  }
+
+  /* separador losangos */
+  .processo-diamonds {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .processo-diamonds-line {
+    width: 48px; height: 1px;
+    background: rgba(201,168,76,0.35);
+  }
+
+  .processo-diamond {
+    width: 8px; height: 8px;
+    background: rgba(201,168,76,0.5);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  .processo-diamond.sm { width: 6px; height: 6px; }
+
+  /* título grande */
+  .processo-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(32px, 7vw, 72px);
+    font-weight: 900;
+    line-height: 1.0;
+    text-align: center;
+    letter-spacing: 0.02em;
+  }
+
+  .processo-title-gold { color: var(--dourado); display: block; }
+  .processo-title-white { color: var(--branco); display: block; }
+
+  /* grid 2x2 de cards */
+  .processo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .processo-card {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: var(--verde-escuro);
+  }
+
+  .processo-card-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
+  }
+
+  .processo-card:hover .processo-card-bg { transform: scale(1.04); }
+
+  .processo-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,24,10,0.92) 0%, rgba(10,24,10,0.30) 60%, transparent 100%);
+  }
+
+  .processo-card-content {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+  }
+
+  .processo-card-num {
+    position: absolute;
+    top: 14px; left: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: rgba(201,168,76,0.80);
+    z-index: 1;
+  }
+
+  .processo-card-icon {
+    position: absolute;
+    top: 12px; right: 14px;
+    font-size: 16px;
+    z-index: 1;
+    opacity: 0.75;
+  }
+
+  .processo-card-line {
+    width: 28px; height: 2px;
+    background: var(--dourado);
+    margin-bottom: 8px;
+  }
+
+  .processo-card-title {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(13px, 1.4vw, 15px);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--branco);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .processo-card-desc {
+    font-size: clamp(12px, 1.2vw, 13px);
+    color: rgba(253,250,245,0.70);
+    line-height: 1.6;
+  }
+
+  /* rodapé quote */
+  .processo-footer-quote {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 6px;
+    padding: 18px 22px;
+    width: 100%;
+  }
+
+  .processo-footer-dot {
+    width: 10px; height: 10px;
+    min-width: 10px;
+    background: var(--dourado);
+    border-radius: 50%;
+  }
+
+  .processo-footer-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(14px, 1.5vw, 17px);
+    color: rgba(253,250,245,0.85);
+  }
+
+  /* ─── SABORES ───────────────────────────────────────────── */
+  #sabores {
+    background-color: var(--creme);
+    background-image: none;
+    flex-direction: column;
+    border-bottom: 4px solid var(--verde-escuro);
+  }
+
+  .sabores-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+    max-width: 780px;
+    width: 100%;
+  }
+
+  .sabores-header { text-align: center; }
+
+  /* eyebrow com traços */
+  .sabores-eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: var(--verde);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .sabores-eyebrow-line {
+    width: 32px; height: 1px;
+    background: var(--verde);
+    opacity: 0.5;
+  }
+
+  /* losangos vermelhos */
+  .sabores-diamonds {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .sabores-diamonds-line {
+    width: 40px; height: 1px;
+    background: var(--vermelho);
+  }
+
+  .sabores-diamond {
+    width: 8px; height: 8px;
+    background: var(--vermelho);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  .sabores-diamond.sm { width: 6px; height: 6px; }
+
+  /* título */
+  .sabores-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(28px, 6vw, 58px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+  }
+
+  .sabores-title-green { color: var(--verde); display: block; }
+  .sabores-title-red   { color: var(--vermelho); display: block; }
+
+  /* grid 2·2·1 */
+  .pizzas-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    width: 100%;
+  }
+
+  /* card padrão — foto de fundo, conteúdo em baixo */
+  .pizza-card {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    cursor: pointer;
+    transition: transform 0.25s;
+  }
+
+  .pizza-card:hover { transform: translateY(-3px); }
+
+  /* 5º card ocupa as 2 colunas e fica mais baixo */
+  .pizza-card:last-child {
+    grid-column: 1 / -1;
+    min-height: 260px;
+  }
+
+  /* foto de fundo */
+  .pizza-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
+  }
+
+  .pizza-card:hover .pizza-bg { transform: scale(1.04); }
+
+  /* overlay escuro de baixo pra cima */
+  .pizza-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top,
+      rgba(10,10,10,0.92) 0%,
+      rgba(10,10,10,0.55) 50%,
+      rgba(10,10,10,0.10) 100%);
+  }
+
+  /* badges no topo */
+  .pizza-badge-ferm {
+    position: absolute;
+    top: 12px; left: 12px;
+    background: rgba(0,0,0,0.45);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.85);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border-radius: 100px;
+    backdrop-filter: blur(4px);
+    z-index: 2;
+  }
+
+  .pizza-badge-size {
+    position: absolute;
+    top: 12px; right: 12px;
+    color: rgba(255,255,255,0.70);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    z-index: 2;
+  }
+
+  /* conteúdo inferior */
+  .pizza-info {
+    position: relative;
+    z-index: 2;
+    padding: 18px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* linha dourada antes do nome */
+  .pizza-line {
+    width: 24px; height: 2px;
+    background: var(--dourado);
+    margin-bottom: 6px;
+  }
+
+  .pizza-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 2.2vw, 24px);
+    font-weight: 700;
+    font-style: italic;
+    color: var(--branco);
+    line-height: 1.2;
+  }
+
+  .pizza-ingredients {
+    font-size: 12px;
+    color: rgba(255,255,255,0.68);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  /* rodapé preço + botão */
+  .pizza-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .pizza-price-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.06em;
+    margin-bottom: 2px;
+  }
+
+  .pizza-price {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(16px, 2vw, 20px);
+    font-weight: 700;
+    color: var(--dourado);
+  }
+
+  .pizza-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--vermelho);
+    color: var(--branco);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 100px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+
+  .pizza-btn:hover { background: var(--vermelho-claro); }
+
+  /* card largo (5º) — botão maior */
+  .pizza-card:last-child .pizza-btn {
+    padding: 11px 28px;
+    font-size: 13px;
+  }
+
+  .sabores-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--verde-escuro);
+    color: var(--branco);
+    padding: 14px 24px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .sabores-footer strong { color: var(--dourado); }
+
+  .sabores-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--verde-escuro);
+    color: var(--branco);
+    padding: 14px 24px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .sabores-footer strong { color: var(--dourado); }
+
+  /* ─── EVENTOS ───────────────────────────────────────────── */
+  #eventos {
+    background-image:
+      linear-gradient(to bottom, rgba(18,32,16,0.75) 0%, rgba(18,32,16,0.85) 100%),
+      url('images/eventos-mesa.webp');
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .eventos-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    max-width: 680px;
+    width: 100%;
+  }
+
+  /* badge vermelho topo */
+  .eventos-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--vermelho-claro);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .eventos-badge-dot {
+    width: 8px; height: 8px;
+    background: var(--vermelho-claro);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* eyebrow padrão B — dourado com traços */
+  .eventos-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--dourado);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+  }
+
+  .eventos-eyebrow-line {
+    width: 28px; height: 1px;
+    background: var(--dourado);
+    opacity: 0.5;
+  }
+
+  /* losangos */
+  .eventos-diamonds {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: -10px;
+  }
+
+  .eventos-diamonds-line {
+    width: 40px; height: 1px;
+    background: rgba(201,168,76,0.35);
+  }
+
+  .eventos-diamond {
+    width: 7px; height: 7px;
+    background: rgba(201,168,76,0.65);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  .eventos-diamond.sm { width: 5px; height: 5px; }
+
+  /* título */
+  .eventos-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(32px, 7vw, 64px);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: 0.02em;
+  }
+
+  .eventos-title-gold  { color: var(--dourado); display: block; }
+  .eventos-title-white { color: var(--branco);  display: block; }
+
+  /* textos */
+  .eventos-lead {
+    font-size: clamp(15px, 1.8vw, 18px);
+    font-weight: 400;
+    color: rgba(253,250,245,0.85);
+    line-height: 1.7;
+  }
+
+  .eventos-body {
+    font-size: clamp(13px, 1.4vw, 15px);
+    font-weight: 300;
+    color: rgba(253,250,245,0.65);
+    line-height: 1.8;
+  }
+
+  /* grid 2·2·1 igual ao processo */
+  .eventos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    width: 100%;
+    border: 1px solid rgba(201,168,76,0.18);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .evento-card {
+    background: rgba(255,255,255,0.05);
+    padding: clamp(20px, 3vw, 30px) clamp(16px, 2.5vw, 24px);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-right: 1px solid rgba(201,168,76,0.18);
+    border-bottom: 1px solid rgba(201,168,76,0.18);
+    transition: background 0.25s;
+  }
+
+  .evento-card:hover { background: rgba(255,255,255,0.09); }
+
+  /* card largo ocupa 2 colunas */
+  .evento-card.wide {
+    grid-column: 1 / -1;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .evento-card:nth-child(even):not(.wide) { border-right: none; }
+  .evento-card:nth-child(3), .evento-card:nth-child(4) { border-bottom: none; }
+
+  .evento-icon {
+    color: var(--dourado);
+    width: 24px; height: 24px;
+    flex-shrink: 0;
+  }
+
+  .evento-line {
+    width: 22px; height: 2px;
+    background: var(--dourado);
+    opacity: 0.65;
+  }
+
+  .evento-title {
+    font-size: clamp(13px, 1.4vw, 15px);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--branco);
+    line-height: 1.3;
+  }
+
+  .evento-desc {
+    font-size: clamp(12px, 1.2vw, 13px);
+    color: rgba(253,250,245,0.58);
+    line-height: 1.65;
+  }
+
+  /* botão e rodapé */
+  .eventos-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .btn-evento {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--vermelho);
+    color: var(--branco);
+    font-size: 15px;
+    font-weight: 700;
+    padding: 16px 36px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-evento:hover { background: var(--vermelho-claro); transform: translateY(-2px); }
+
+  .eventos-disclaimer {
+    font-size: 12px;
+    color: rgba(253,250,245,0.40);
+  }
+  #revenda {
+    background-color: #5a1010;
+    background-image:
+      linear-gradient(160deg, rgba(107,18,18,0.88) 0%, rgba(74,13,13,0.88) 50%, rgba(61,26,26,0.90) 100%),
+      url('images/revenda-freezer.webp');
+    flex-direction: column;
+  }
+
+  #revenda .section-title { color: var(--branco); }
+  #revenda .section-eyebrow { color: var(--dourado); }
+
+  .revenda-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 52px;
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  .revenda-header { text-align: center; max-width: 620px; }
+  .revenda-header .section-body { color: rgba(253,250,245,0.82); }
+
+  .revenda-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    width: 100%;
+  }
+
+  .revenda-card {
+    background: rgba(253,250,245,0.08);
+    border: 1px solid rgba(253,250,245,0.16);
+    border-radius: 4px;
+    padding: clamp(24px, 3vw, 40px);
+    backdrop-filter: blur(8px);
+  }
+
+  .revenda-card-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .revenda-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(17px, 1.8vw, 22px);
+    font-weight: 700;
+    color: var(--dourado);
+    margin-bottom: 12px;
+  }
+
+  .revenda-card-desc {
+    font-size: 14px;
+    color: rgba(253,250,245,0.78);
+    line-height: 1.7;
+  }
+
+  /* ─── DIFERENCIAIS ──────────────────────────────────────── */
+  #diferenciais {
+    background-color: var(--verde-escuro);
+    background-image: none;
+    flex-direction: column;
+  }
+
+  .diferenciais-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+    max-width: 700px;
+    width: 100%;
+  }
+
+  /* eyebrow com traços */
+  .dif-eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: var(--dourado);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+  }
+
+  .dif-eyebrow-line {
+    width: 32px; height: 1px;
+    background: var(--dourado);
+    opacity: 0.5;
+  }
+
+  /* losangos */
+  .dif-diamonds {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .dif-diamonds-line {
+    width: 48px; height: 1px;
+    background: rgba(201,168,76,0.35);
+  }
+
+  .dif-diamond {
+    width: 8px; height: 8px;
+    background: rgba(201,168,76,0.55);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  .dif-diamond.sm { width: 6px; height: 6px; }
+
+  /* título */
+  .dif-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(30px, 6.5vw, 64px);
+    font-weight: 900;
+    line-height: 1.0;
+    text-align: center;
+    letter-spacing: 0.02em;
+  }
+
+  .dif-title-gold  { color: var(--dourado); display: block; }
+  .dif-title-white { color: var(--branco); display: block; }
+
+  /* header bloco */
+  .dif-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+  }
+
+  /* grid 2x3 */
+  .dif-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    width: 100%;
+    border: 1px solid rgba(201,168,76,0.18);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  /* cada card */
+  .dif-card {
+    background: rgba(255,255,255,0.04);
+    padding: clamp(22px, 3vw, 32px) clamp(18px, 2.5vw, 28px);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-right: 1px solid rgba(201,168,76,0.18);
+    border-bottom: 1px solid rgba(201,168,76,0.18);
+    transition: background 0.25s;
+  }
+
+  .dif-card:hover { background: rgba(255,255,255,0.07); }
+
+  /* remove borda direita dos cards da coluna direita */
+  .dif-card:nth-child(even) { border-right: none; }
+
+  /* remove borda inferior dos últimos dois */
+  .dif-card:nth-last-child(-n+2) { border-bottom: none; }
+
+  /* ícone SVG outline dourado */
+  .dif-icon {
+    color: var(--dourado);
+    width: 26px; height: 26px;
+    flex-shrink: 0;
+  }
+
+  /* linha dourada */
+  .dif-line {
+    width: 22px; height: 2px;
+    background: var(--dourado);
+    opacity: 0.7;
+  }
+
+  /* título do card */
+  .dif-card-title {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(13px, 1.4vw, 15px);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--branco);
+    line-height: 1.3;
+  }
+
+  /* descrição */
+  .dif-card-desc {
+    font-size: clamp(12px, 1.2vw, 14px);
+    color: rgba(253,250,245,0.58);
+    line-height: 1.65;
+  }
+
+  /* ─── PROVA SOCIAL ──────────────────────────────────────── */
+  #prova-social {
+    background-color: var(--verde-escuro);
+    background-image:
+      url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.05'%3E%3Cpath d='M20 0l20 20-20 20L0 20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    flex-direction: column;
+  }
+
+  .prova-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 52px;
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  .prova-header { text-align: center; }
+  .prova-header .section-eyebrow { color: var(--dourado); }
+  .prova-header .section-title { color: var(--branco); }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+  }
+
+  .review-card {
+    background: rgba(253,250,245,0.07);
+    border: 1px solid rgba(253,250,245,0.13);
+    border-radius: 4px;
+    padding: clamp(20px, 2.5vw, 32px);
+    backdrop-filter: blur(8px);
+  }
+
+  .review-stars {
+    color: var(--dourado);
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+  }
+
+  .review-text {
+    font-size: clamp(13px, 1.3vw, 15px);
+    color: rgba(253,250,245,0.85);
+    line-height: 1.7;
+    font-style: italic;
+    margin-bottom: 18px;
+  }
+
+  .review-author {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dourado);
+  }
+
+  .review-location {
+    font-size: 12px;
+    color: rgba(253,250,245,0.5);
+  }
+
+  .prova-numbers {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .prova-num { text-align: center; }
+
+  .prova-num .stat-num { color: var(--dourado); }
+  .prova-num .stat-label { color: rgba(253,250,245,0.6); }
+
+  /* ─── CTA FINAL ─────────────────────────────────────────── */
+  #cta {
+    background-color: #3d0a0a;
+    background-image:
+      url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M20 0l20 20-20 20L0 20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+      linear-gradient(135deg, #5a1010 0%, #2d1a0a 50%, #1e3d1a 100%);
+    flex-direction: column;
+  }
+
+  .cta-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 64px);
+    font-weight: 900;
+    color: var(--branco);
+    line-height: 1.1;
+  }
+
+  .cta-title em { font-style: italic; color: var(--dourado); }
+
+  .cta-sub {
+    font-size: clamp(15px, 1.6vw, 18px);
+    color: rgba(253,250,245,0.78);
+    line-height: 1.7;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #25d366;
+    color: var(--branco);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 18px 36px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-whatsapp:hover { background: #20ba5a; transform: translateY(-2px); }
+
+  .cta-info {
+    font-size: 13px;
+    color: rgba(253,250,245,0.5);
+  }
+
+  /* ─── FOOTER ────────────────────────────────────────────── */
+  footer {
+    background: var(--verde-escuro);
+    color: rgba(253,250,245,0.6);
+    text-align: center;
+    padding: 28px clamp(20px, 5vw, 60px);
+    font-size: 13px;
+  }
+
+  footer strong { color: var(--dourado); }
+
+  /* ─── RESPONSIVE ────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+
+    .manifesto-inner,
+    .diferenciais-inner { grid-template-columns: 1fr; gap: 36px; }
+
+    .processo-steps,
+    .revenda-cards,
+    .reviews-grid { grid-template-columns: 1fr; }
+
+    .pizzas-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .prova-numbers { gap: 28px; }
+  }
+
+  @media (max-width: 560px) {
+    .pizzas-grid { grid-template-columns: 1fr 1fr; }
+    .hero-actions { flex-direction: column; }
+    .manifesto-stats { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ─── HAMBURGUER MOBILE ──────────────────────────────────── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+    z-index: 1001;
+  }
+
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--verde-escuro);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+    transform-origin: center;
+  }
+
+  /* estado aberto */
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* menu mobile drawer */
+  .nav-mobile {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(253,250,245,0.98);
+    backdrop-filter: blur(16px);
+    z-index: 1000;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .nav-mobile.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .nav-mobile-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+  }
+
+  .nav-mobile-links li {
+    width: 100%;
+    border-bottom: 1px solid rgba(45,90,39,0.08);
+  }
+
+  .nav-mobile-links a {
+    display: block;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(18px, 5vw, 24px);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--verde-escuro);
+    text-decoration: none;
+    padding: 22px 24px;
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .nav-mobile-links a:hover { color: var(--vermelho); background: rgba(45,90,39,0.04); }
+
+  .nav-mobile-cta {
+    margin-top: 32px;
+    background: var(--verde) !important;
+    color: var(--branco) !important;
+    border-radius: 6px;
+    padding: 18px 48px !important;
+  }
+
+  .nav-mobile-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--verde-escuro);
+    letter-spacing: 0.12em;
+    margin-bottom: 40px;
+  }
+
+  .nav-mobile-logo span { color: var(--vermelho); }
+
+  @media (max-width: 900px) {
+    .nav-hamburger { display: flex; }
+    .nav-mobile { display: flex; }
+  }
+
+  /* ─── CABEÇALHO PADRÃO B — todas as seções ──────────────── */
+  .sec-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .sec-eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    color: var(--dourado);
+  }
+
+  .sec-eyebrow.green { color: var(--verde); }
+  .sec-eyebrow.red   { color: var(--vermelho); }
+
+  .sec-eyebrow-line {
+    width: 28px; height: 1px;
+    background: currentColor;
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+
+  .sec-diamonds {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+  }
+
+  .sec-diamonds-line {
+    width: 40px; height: 1px;
+    opacity: 0.4;
+    flex-shrink: 0;
+  }
+
+  .sec-diamonds.gold .sec-diamonds-line { background: var(--dourado); }
+  .sec-diamonds.gold .sec-diamond       { background: var(--dourado); opacity: 0.65; }
+  .sec-diamonds.red  .sec-diamonds-line { background: var(--vermelho); }
+  .sec-diamonds.red  .sec-diamond       { background: var(--vermelho); opacity: 1; }
+
+  .sec-diamond {
+    width: 7px; height: 7px;
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  .sec-diamond.sm { width: 5px; height: 5px; }
+
+  .sec-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(26px, 6vw, 54px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    text-align: center;
+  }
+
+  .sec-title-gold  { color: var(--dourado);  display: block; }
+  .sec-title-white { color: var(--branco);   display: block; }
+  .sec-title-green { color: var(--verde);    display: block; }
+  .sec-title-red   { color: var(--vermelho); display: block; }
+
+  .sec-sub {
+    font-size: clamp(14px, 1.6vw, 17px);
+    font-weight: 300;
+    line-height: 1.75;
+    max-width: 520px;
+    text-align: center;
+  }
+
+  .sec-sub.light { color: rgba(253,250,245,0.75); }
+  .sec-sub.dark  { color: #555; }
+
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  [data-reveal].visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  [data-reveal-delay="1"] { transition-delay: 0.1s; }
+  [data-reveal-delay="2"] { transition-delay: 0.2s; }
+  [data-reveal-delay="3"] { transition-delay: 0.3s; }
+  [data-reveal-delay="4"] { transition-delay: 0.4s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] { opacity: 1; transform: none; transition: none; }
+    .scroll-line { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">FERMENT<span>A</span>RE</a>
+  <ul class="nav-links">
+    <li><a href="#processo">Processo</a></li>
+    <li><a href="#sabores">Sabores</a></li>
+    <li><a href="#preparo">Preparo</a></li>
+    <li><a href="#eventos">Eventos</a></li>
+    <li><a href="#diferenciais">Diferenciais</a></li>
+    <li><a href="#revenda">Revenda</a></li>
+    <li><a href="#cta" class="nav-cta">Pedir Agora</a></li>
+  </ul>
+  <!-- botão hamburguer — só aparece em mobile -->
+  <button class="nav-hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<!-- MENU MOBILE DRAWER -->
+<div class="nav-mobile" id="nav-mobile" role="dialog" aria-label="Menu de navegação">
+  <div class="nav-mobile-logo">FERMENT<span>A</span>RE</div>
+  <ul class="nav-mobile-links">
+    <li><a href="#processo" class="nav-mobile-link">Processo</a></li>
+    <li><a href="#sabores" class="nav-mobile-link">Sabores</a></li>
+    <li><a href="#preparo" class="nav-mobile-link">Preparo</a></li>
+    <li><a href="#eventos" class="nav-mobile-link">Eventos</a></li>
+    <li><a href="#diferenciais" class="nav-mobile-link">Diferenciais</a></li>
+    <li><a href="#revenda" class="nav-mobile-link">Revenda</a></li>
+    <li><a href="#cta" class="nav-mobile-link nav-mobile-cta">Pedir Agora</a></li>
+  </ul>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- HERO -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section id="hero" class="section-fullscreen">
+  <div class="hero-inner">
+
+    <!-- eyebrow com traços laterais -->
+    <div class="hero-eyebrow" data-reveal>
+      <span class="hero-eyebrow-line"></span>
+      FERMENTAÇÃO NATURAL · PIZZAS CONGELADAS
+      <span class="hero-eyebrow-line"></span>
+    </div>
+
+    <!-- título principal -->
+    <h1 class="hero-title" data-reveal data-reveal-delay="1">
+      Fermentação<br>natural.
+    </h1>
+    <span class="hero-title-italic" data-reveal data-reveal-delay="1">Sabor de verdade.</span>
+
+    <!-- separador losangos -->
+    <div class="hero-diamonds" data-reveal data-reveal-delay="2" aria-hidden="true">
+      <span class="hero-diamonds-line"></span>
+      <span class="hero-diamond small"></span>
+      <span class="hero-diamond"></span>
+      <span class="hero-diamond small"></span>
+      <span class="hero-diamonds-line"></span>
+    </div>
+
+    <!-- subtítulo -->
+    <p class="hero-sub" data-reveal data-reveal-delay="2">
+      Pré-assadas em forno de alta temperatura, prontas em 7 a 10 minutos no forno ou air fryer.
+    </p>
+
+    <!-- botões -->
+    <div class="hero-actions" data-reveal data-reveal-delay="3">
+      <a href="https://wa.me" class="btn-whatsapp-hero" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Fazer pedido no WhatsApp
+      </a>
+      <a href="#revenda" class="btn-revendedor">
+        Seja um parceiro revendedor
+      </a>
+    </div>
+
+    <!-- chips de atributos -->
+    <div class="hero-chips" data-reveal data-reveal-delay="4">
+      <div class="hero-chip"><span class="hero-chip-icon">◎</span> SEM ADITIVOS</div>
+      <div class="hero-chip"><span class="hero-chip-icon">◷</span> PRONTA EM 7–10 MIN</div>
+      <div class="hero-chip"><span class="hero-chip-icon">◈</span> ARTESANAL</div>
+    </div>
+
+  </div>
+
+  <!-- rodapé localização -->
+  <a href="#processo" class="hero-location" data-reveal>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+    Eventos com pizza artesanal ao vivo. Conheça nossa experiência →
+  </a>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- MANIFESTO -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section id="manifesto" class="section-fullscreen">
+  <div class="manifesto-inner">
+
+    <!-- eyebrow dourado com traços -->
+    <div class="manifesto-eyebrow" data-reveal>
+      <span class="manifesto-eyebrow-line"></span>
+      NOSSA ESSÊNCIA · QUEM SOMOS
+      <span class="manifesto-eyebrow-line"></span>
+    </div>
+
+    <!-- separador losangos vermelho -->
+    <div class="manifesto-diamonds" data-reveal aria-hidden="true">
+      <span class="manifesto-diamonds-line"></span>
+      <span class="manifesto-diamond sm"></span>
+      <span class="manifesto-diamond"></span>
+      <span class="manifesto-diamond sm"></span>
+      <span class="manifesto-diamonds-line"></span>
+    </div>
+
+    <!-- título -->
+    <h2 class="manifesto-title" data-reveal data-reveal-delay="1">
+      Uma marca que nasceu da
+      <em>paixão pelo tempo certo.</em>
+    </h2>
+
+    <!-- parágrafo -->
+    <p class="manifesto-body" data-reveal data-reveal-delay="2">
+      Criamos pizzas artesanais congeladas para quem busca praticidade sem abrir mão do sabor verdadeiro.
+    </p>
+
+    <!-- lista 01–04 -->
+    <div class="manifesto-list" data-reveal data-reveal-delay="2">
+      <div class="manifesto-item">
+        <span class="manifesto-num">01</span>
+        <div>
+          <div class="manifesto-item-title">Nasceu da paixão</div>
+          <p class="manifesto-item-desc">Fermentação natural e processo artesanal, sem pressa e sem atalhos.</p>
+        </div>
+      </div>
+      <div class="manifesto-item">
+        <span class="manifesto-num">02</span>
+        <div>
+          <div class="manifesto-item-title">Praticidade e sabor real</div>
+          <p class="manifesto-item-desc">Cada pizza une conveniência e alma artesanal sem concessões.</p>
+        </div>
+      </div>
+      <div class="manifesto-item">
+        <span class="manifesto-num">03</span>
+        <div>
+          <div class="manifesto-item-title">Ingredientes selecionados</div>
+          <p class="manifesto-item-desc">Respeito total ao tempo de maturação da massa.</p>
+        </div>
+      </div>
+      <div class="manifesto-item">
+        <span class="manifesto-num">04</span>
+        <div>
+          <div class="manifesto-item-title">Experiência premium</div>
+          <p class="manifesto-item-desc">Em casa, no comércio ou em eventos especiais.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- rodapé quote -->
+    <div class="manifesto-footer-quote" data-reveal data-reveal-delay="3">
+      <span class="manifesto-footer-dot"></span>
+      <p class="manifesto-footer-text">Tempo, fogo e ingredientes de verdade — essa é a Fermentare.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PROCESSO -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section id="processo" class="section-fullscreen">
+  <div class="processo-inner">
+
+    <!-- eyebrow -->
+    <div class="processo-header">
+      <div class="processo-eyebrow" data-reveal>
+        <span class="processo-eyebrow-line"></span>
+        O PROCESSO
+        <span class="processo-eyebrow-line"></span>
+      </div>
+      <!-- losangos -->
+      <div class="processo-diamonds" data-reveal aria-hidden="true">
+        <span class="processo-diamonds-line"></span>
+        <span class="processo-diamond sm"></span>
+        <span class="processo-diamond"></span>
+        <span class="processo-diamond sm"></span>
+        <span class="processo-diamonds-line"></span>
+      </div>
+      <!-- título grande -->
+      <div class="processo-title" data-reveal data-reveal-delay="1">
+        <span class="processo-title-gold">DO TEMPO</span>
+        <span class="processo-title-white">AO SEU FORNO</span>
+      </div>
+    </div>
+
+    <!-- grid 2x2 -->
+    <div class="processo-grid">
+      <!-- 01 -->
+      <div class="processo-card" data-reveal>
+        <div class="processo-card-bg" style="background-image: url('images/processo-card-01-levain.webp');"></div>
+        <div class="processo-card-overlay"></div>
+        <span class="processo-card-num">01</span>
+        <span class="processo-card-icon">◎</span>
+        <div class="processo-card-content">
+          <div class="processo-card-line"></div>
+          <div class="processo-card-title">Fermentação<br>Natural</div>
+          <p class="processo-card-desc">A massa cresce no seu ritmo, respeitando o tempo ideal. Mais leve, mais digestiva, mais saborosa.</p>
+        </div>
+      </div>
+      <!-- 02 -->
+      <div class="processo-card" data-reveal data-reveal-delay="1">
+        <div class="processo-card-bg" style="background-image: url('images/processo-card-02-forno.webp');"></div>
+        <div class="processo-card-overlay"></div>
+        <span class="processo-card-num">02</span>
+        <span class="processo-card-icon">↑</span>
+        <div class="processo-card-content">
+          <div class="processo-card-line"></div>
+          <div class="processo-card-title">Forno de Alta<br>Temperatura</div>
+          <p class="processo-card-desc">Assadas em forno de alta temperatura. Massa aerada, crocante e cheia de sabor.</p>
+        </div>
+      </div>
+      <!-- 03 -->
+      <div class="processo-card" data-reveal data-reveal-delay="2">
+        <div class="processo-card-bg" style="background-image: url('images/processo-card-03-vacuo.webp');"></div>
+        <div class="processo-card-overlay"></div>
+        <span class="processo-card-num">03</span>
+        <span class="processo-card-icon">▣</span>
+        <div class="processo-card-content">
+          <div class="processo-card-line"></div>
+          <div class="processo-card-title">Seladas<br>a Vácuo</div>
+          <p class="processo-card-desc">Após assadas, seladas a vácuo e congeladas — sabor, crocância e qualidade preservados.</p>
+        </div>
+      </div>
+      <!-- 04 -->
+      <div class="processo-card" data-reveal data-reveal-delay="3">
+        <div class="processo-card-bg" style="background-image: url('images/processo-card-04-pronta.webp');"></div>
+        <div class="processo-card-overlay"></div>
+        <span class="processo-card-num">04</span>
+        <span class="processo-card-icon">◷</span>
+        <div class="processo-card-content">
+          <div class="processo-card-line"></div>
+          <div class="processo-card-title">Pronta em 7–10<br>Minutos</div>
+          <p class="processo-card-desc">Forno ou air fryer. Praticidade com o verdadeiro sabor artesanal.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- rodapé quote -->
+    <div class="processo-footer-quote" data-reveal>
+      <span class="processo-footer-dot"></span>
+      <p class="processo-footer-text">O sabor que nasce do fogo e do tempo.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SABORES -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section id="sabores" class="section-fullscreen">
+  <div class="sabores-inner">
+
+    <!-- cabeçalho -->
+    <div class="sabores-header">
+      <div class="sabores-eyebrow" data-reveal>
+        <span class="sabores-eyebrow-line"></span>
+        O CARDÁPIO
+        <span class="sabores-eyebrow-line"></span>
+      </div>
+      <div class="sabores-diamonds" data-reveal aria-hidden="true">
+        <span class="sabores-diamonds-line"></span>
+        <span class="sabores-diamond sm"></span>
+        <span class="sabores-diamond"></span>
+        <span class="sabores-diamond sm"></span>
+        <span class="sabores-diamonds-line"></span>
+      </div>
+      <div class="sabores-title" data-reveal data-reveal-delay="1">
+        <span class="sabores-title-green">SABORES QUE</span>
+        <span class="sabores-title-red">RESPEITAM O</span>
+        <span class="sabores-title-red">TEMPO</span>
+      </div>
+    </div>
+
+    <!-- grid 2·2·1 -->
+    <div class="pizzas-grid">
+
+      <!-- 01 Marguerita -->
+      <div class="pizza-card" data-reveal>
+        <div class="pizza-bg" style="background-image:url('images/pizza-marguerita.webp');"></div>
+        <div class="pizza-overlay"></div>
+        <span class="pizza-badge-ferm">FERM. NATURAL</span>
+        <span class="pizza-badge-size">30 cm</span>
+        <div class="pizza-info">
+          <div class="pizza-line"></div>
+          <div class="pizza-name">Marguerita</div>
+          <p class="pizza-ingredients">Molho de tomate, mozzarella, manjericão fresco e azeite extra virgem.</p>
+          <div class="pizza-footer">
+            <div>
+              <div class="pizza-price-label">a partir de</div>
+              <div class="pizza-price">R$ 39,90</div>
+            </div>
+            <a href="https://wa.me" class="pizza-btn" target="_blank" rel="noopener">PEDIR</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 Frango Catupiry -->
+      <div class="pizza-card" data-reveal data-reveal-delay="1">
+        <div class="pizza-bg" style="background-image:url('images/pizza-frango-catupiry.webp');"></div>
+        <div class="pizza-overlay"></div>
+        <span class="pizza-badge-ferm">FERM. NATURAL</span>
+        <span class="pizza-badge-size">30 cm</span>
+        <div class="pizza-info">
+          <div class="pizza-line"></div>
+          <div class="pizza-name">Frango Catupiry</div>
+          <p class="pizza-ingredients">Frango desfiado temperado, catupiry cremoso e mozzarella.</p>
+          <div class="pizza-footer">
+            <div>
+              <div class="pizza-price-label">a partir de</div>
+              <div class="pizza-price">R$ 44,90</div>
+            </div>
+            <a href="https://wa.me" class="pizza-btn" target="_blank" rel="noopener">PEDIR</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 Quatro Queijos -->
+      <div class="pizza-card" data-reveal data-reveal-delay="2">
+        <div class="pizza-bg" style="background-image:url('images/pizza-quatro-queijos.webp');"></div>
+        <div class="pizza-overlay"></div>
+        <span class="pizza-badge-ferm">FERM. NATURAL</span>
+        <span class="pizza-badge-size">30 cm</span>
+        <div class="pizza-info">
+          <div class="pizza-line"></div>
+          <div class="pizza-name">Quatro Queijos</div>
+          <p class="pizza-ingredients">Mozzarella, gorgonzola, parmesão e catupiry.</p>
+          <div class="pizza-footer">
+            <div>
+              <div class="pizza-price-label">a partir de</div>
+              <div class="pizza-price">R$ 46,90</div>
+            </div>
+            <a href="https://wa.me" class="pizza-btn" target="_blank" rel="noopener">PEDIR</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 Calabresa Catupiry -->
+      <div class="pizza-card" data-reveal data-reveal-delay="3">
+        <div class="pizza-bg" style="background-image:url('images/pizza-calabresa.webp');"></div>
+        <div class="pizza-overlay"></div>
+        <span class="pizza-badge-ferm">FERM. NATURAL</span>
+        <span class="pizza-badge-size">30 cm</span>
+        <div class="pizza-info">
+          <div class="pizza-line"></div>
+          <div class="pizza-name">Calabresa Catupiry</div>
+          <p class="pizza-ingredients">Calabresa fatiada, catupiry, cebola e mozzarella.</p>
+          <div class="pizza-footer">
+            <div>
+              <div class="pizza-price-label">a partir de</div>
+              <div class="pizza-price">R$ 44,90</div>
+            </div>
+            <a href="https://wa.me" class="pizza-btn" target="_blank" rel="noopener">PEDIR</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 05 Pepperoni — card largo -->
+      <div class="pizza-card" data-reveal data-reveal-delay="4">
+        <div class="pizza-bg" style="background-image:url('images/pizza-pepperoni.webp');"></div>
+        <div class="pizza-overlay"></div>
+        <span class="pizza-badge-ferm">FERM. NATURAL</span>
+        <span class="pizza-badge-size">30 cm</span>
+        <div class="pizza-info">
+          <div class="pizza-line"></div>
+          <div class="pizza-name">Pepperoni</div>
+          <p class="pizza-ingredients">Pepperoni italiano, molho artesanal de tomate e mozzarella.</p>
+          <div class="pizza-footer">
+            <div>
+              <div class="pizza-price-label">a partir de</div>
+              <div class="pizza-price">R$ 46,90</div>
+            </div>
+            <a href="https://wa.me" class="pizza-btn" target="_blank" rel="noopener">PEDIR ESSE SABOR</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="sabores-footer" data-reveal>
+      ❄️ Perfeitas para o freezer · Duram até <strong>3 meses</strong> congeladas · Prontas em <strong>7–10 minutos</strong>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PREPARO -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section id="preparo" class="section-fullscreen" style="background-color:var(--creme);flex-direction:column;border-top:4px solid var(--verde-escuro);">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:32px;max-width:680px;width:100%;position:relative;z-index:1;">
+
+    <!-- cabeçalho padrão B -->
+    <div class="sec-header">
+      <div class="sec-eyebrow green" data-reveal>
+        <span class="sec-eyebrow-line"></span>
+        SIMPLES ASSIM
+        <span class="sec-eyebrow-line"></span>
+      </div>
+      <div class="sec-diamonds red" data-reveal aria-hidden="true">
+        <span class="sec-diamonds-line"></span>
+        <span class="sec-diamond sm"></span>
+        <span class="sec-diamond"></span>
+        <span class="sec-diamond sm"></span>
+        <span class="sec-diamonds-line"></span>
+      </div>
+      <div class="sec-title" data-reveal data-reveal-delay="1">
+        <span class="sec-title-green">DO FREEZER AO FORNO</span>
+        <span class="sec-title-red">EM MINUTOS</span>
+      </div>
+      <p class="sec-sub dark" data-reveal data-reveal-delay="2">
+        Sem complicação. Sem descongelar. Do freezer direto para o calor.
+      </p>
+    </div>
+
+    <!-- imagem dupla antes/depois -->
+    <div data-reveal data-reveal-delay="2" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;border-radius:10px;overflow:hidden;">
+      <div style="background:linear-gradient(135deg,#2d3a2d,#1e3d1a);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:48px;">🧊</div>
+      <div style="background:linear-gradient(135deg,#5a2800,#8b1a1a);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:48px;">🔥</div>
+    </div>
+
+    <!-- 4 cards de instrução -->
+    <div data-reveal data-reveal-delay="3" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;">
+
+      <!-- 01 -->
+      <div style="background:var(--verde-escuro);border-radius:10px;padding:24px 20px;display:flex;flex-direction:column;gap:10px;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5">
+          <rect x="5" y="2" width="14" height="20" rx="2"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="9" y1="15" x2="13" y2="15"/>
+        </svg>
+        <div style="width:22px;height:2px;background:#c9a84c;opacity:.6;"></div>
+        <p style="font-size:clamp(13px,1.4vw,15px);color:rgba(253,250,245,0.75);line-height:1.65;">Sem precisar descongelar. A pizza vai direto para o calor.</p>
+      </div>
+
+      <!-- 02 -->
+      <div style="background:var(--verde-escuro);border-radius:10px;padding:24px 20px;display:flex;flex-direction:column;gap:10px;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5">
+          <rect x="3" y="6" width="18" height="14" rx="2"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><circle cx="12" cy="13" r="2"/><line x1="12" y1="11" x2="12" y2="9"/>
+        </svg>
+        <div style="width:22px;height:2px;background:#c9a84c;opacity:.6;"></div>
+        <p style="font-size:clamp(13px,1.4vw,15px);color:rgba(253,250,245,0.75);line-height:1.65;">Forno a 220°C ou air fryer a 180°C por 5 minutos antes de entrar.</p>
+      </div>
+
+      <!-- 03 -->
+      <div style="background:var(--branco);border:1px solid rgba(45,90,39,0.15);border-radius:10px;padding:24px 20px;display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--verde-escuro)" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <span style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:rgba(45,90,39,0.12);line-height:1;">03</span>
+        </div>
+        <div style="font-size:clamp(14px,1.5vw,16px);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--verde-escuro);">ASSE POR 7–10 MIN</div>
+      </div>
+
+      <!-- 04 -->
+      <div style="background:var(--verde-escuro);border-radius:10px;padding:24px 20px;display:flex;flex-direction:column;gap:10px;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5">
+          <path d="M12 2C8 2 5 6 5 10c0 5 7 12 7 12s7-7 7-12c0-4-3-8-7-8z"/><circle cx="12" cy="10" r="2"/>
+        </svg>
+        <div style="width:22px;height:2px;background:#c9a84c;opacity:.6;"></div>
+        <p style="font-size:clamp(13px,1.4vw,15px);color:rgba(253,250,245,0.75);line-height:1.65;">Pizza artesanal pronta, crocante e cheia de sabor.</p>
+      </div>
+
+    </div>
+
+    <!-- quote rodapé -->
+    <div data-reveal data-reveal-delay="4" style="display:flex;align-items:center;gap:14px;background:var(--verde-escuro);color:var(--branco);padding:18px 22px;border-radius:8px;width:100%;">
+      <span style="width:10px;height:10px;min-width:10px;background:var(--dourado);border-radius:50%;display:block;"></span>
+      <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(14px,1.5vw,17px);color:rgba(253,250,245,0.88);">Praticidade com o verdadeiro sabor artesanal.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- EVENTOS -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section id="eventos" class="section-fullscreen">
+  <div class="eventos-inner">
+
+    <!-- badge vermelho -->
+    <div class="eventos-badge" data-reveal>
+      <span class="eventos-badge-dot"></span>
+      AO VIVO NO SEU EVENTO
+    </div>
+
+    <!-- eyebrow padrão B -->
+    <div class="eventos-eyebrow" data-reveal>
+      <span class="eventos-eyebrow-line"></span>
+      PARA SUA CELEBRAÇÃO
+      <span class="eventos-eyebrow-line"></span>
+    </div>
+    <div class="eventos-diamonds" data-reveal aria-hidden="true">
+      <span class="eventos-diamonds-line"></span>
+      <span class="eventos-diamond sm"></span>
+      <span class="eventos-diamond"></span>
+      <span class="eventos-diamond sm"></span>
+      <span class="eventos-diamonds-line"></span>
+    </div>
+
+    <!-- título -->
+    <div class="eventos-title" data-reveal data-reveal-delay="1">
+      <span class="eventos-title-gold">FERMENTARE</span>
+      <span class="eventos-title-white">NO SEU EVENTO</span>
+    </div>
+
+    <!-- textos -->
+    <p class="eventos-lead" data-reveal data-reveal-delay="2">
+      Levamos a experiência da pizza artesanal até você.
+    </p>
+    <p class="eventos-body" data-reveal data-reveal-delay="2">
+      Além das pizzas congeladas, também atendemos eventos. Levamos nossa estrutura até o local e preparamos as pizzas durante todo o decorrer do evento, garantindo experiência, sabor e praticidade para seus convidados.
+    </p>
+
+    <!-- grid 2·2·1 -->
+    <div class="eventos-grid" data-reveal data-reveal-delay="3">
+
+      <!-- Casamentos -->
+      <div class="evento-card">
+        <svg class="evento-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+        <div class="evento-line"></div>
+        <div class="evento-title">CASAMENTOS</div>
+        <p class="evento-desc">Uma experiência gastronômica inesquecível para o dia mais especial.</p>
+      </div>
+
+      <!-- Aniversários -->
+      <div class="evento-card">
+        <svg class="evento-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
+        </svg>
+        <div class="evento-line"></div>
+        <div class="evento-title">ANIVERSÁRIOS</div>
+        <p class="evento-desc">Pizza artesanal ao vivo para celebrar com quem você ama.</p>
+      </div>
+
+      <!-- Eventos Corporativos -->
+      <div class="evento-card">
+        <svg class="evento-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+        </svg>
+        <div class="evento-line"></div>
+        <div class="evento-title">EVENTOS<br>CORPORATIVOS</div>
+        <p class="evento-desc">Diferencial gastronômico para reuniões, lançamentos e confraternizações.</p>
+      </div>
+
+      <!-- Confraternizações -->
+      <div class="evento-card">
+        <svg class="evento-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <div class="evento-line"></div>
+        <div class="evento-title">CONFRATERNIZAÇÕES</div>
+        <p class="evento-desc">Descontração e sabor artesanal para aproximar equipes e amigos.</p>
+      </div>
+
+      <!-- Eventos Privados — card largo -->
+      <div class="evento-card wide">
+        <svg class="evento-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2C8 2 5 6 5 10c0 5 7 12 7 12s7-7 7-12c0-4-3-8-7-8z"/><circle cx="12" cy="10" r="2"/>
+        </svg>
+        <div class="evento-line"></div>
+        <div class="evento-title">EVENTOS PRIVADOS</div>
+        <p class="evento-desc">Levamos toda a estrutura ao seu local. Pizza artesanal preparada ao vivo, do começo ao fim do evento.</p>
+      </div>
+
+    </div>
+
+    <!-- botão + disclaimer -->
+    <div class="eventos-footer" data-reveal data-reveal-delay="4">
+      <a href="https://wa.me" class="btn-evento" target="_blank" rel="noopener">
+        Quero contratar para evento
+      </a>
+      <p class="eventos-disclaimer">Disponibilidade sujeita à agenda e à região de atendimento.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- REVENDA -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section id="revenda" class="section-fullscreen">
+  <div class="revenda-inner">
+    <div class="revenda-header">
+      <div class="sec-header">
+        <div class="sec-eyebrow" data-reveal>
+          <span class="sec-eyebrow-line"></span>
+          PARA REVENDEDORES
+          <span class="sec-eyebrow-line"></span>
+        </div>
+        <div class="sec-diamonds gold" data-reveal aria-hidden="true">
+          <span class="sec-diamonds-line"></span>
+          <span class="sec-diamond sm"></span>
+          <span class="sec-diamond"></span>
+          <span class="sec-diamond sm"></span>
+          <span class="sec-diamonds-line"></span>
+        </div>
+        <div class="sec-title" data-reveal data-reveal-delay="1">
+          <span class="sec-title-white">SEJA UM PARCEIRO</span>
+          <span class="sec-title-gold">FERMENTARE</span>
+        </div>
+        <p class="sec-sub light" data-reveal data-reveal-delay="2">
+          Leve pizzas artesanais de fermentação natural para os seus clientes. Praticidade, qualidade e margem garantida.
+        </p>
+      </div>
+    </div>
+    <div class="revenda-cards">
+      <div class="revenda-card" data-reveal>
+        <span class="revenda-card-icon">📦</span>
+        <div class="revenda-card-title">Fácil de Estoque</div>
+        <p class="revenda-card-desc">Seladas a vácuo e congeladas, as pizzas duram até 3 meses. Ideal para manter no freezer sem desperdício.</p>
+      </div>
+      <div class="revenda-card" data-reveal data-reveal-delay="1">
+        <span class="revenda-card-icon">💰</span>
+        <div class="revenda-card-title">Margem Atrativa</div>
+        <p class="revenda-card-desc">Produto premium com alto valor percebido. Excelente oportunidade de lucro para revendedores e pequenos negócios.</p>
+      </div>
+      <div class="revenda-card" data-reveal data-reveal-delay="2">
+        <span class="revenda-card-icon">🤝</span>
+        <div class="revenda-card-title">Suporte Completo</div>
+        <p class="revenda-card-desc">Acompanhamento direto, materiais de divulgação e suporte para você vender mais com menos esforço.</p>
+      </div>
+    </div>
+    <a href="#cta" class="btn-primary" data-reveal>Quero ser revendedor →</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- DIFERENCIAIS -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section id="diferenciais" class="section-fullscreen">
+  <div class="diferenciais-inner">
+
+    <!-- header -->
+    <div class="dif-header">
+      <div class="dif-eyebrow" data-reveal>
+        <span class="dif-eyebrow-line"></span>
+        POR QUE FERMENTARE
+        <span class="dif-eyebrow-line"></span>
+      </div>
+      <div class="dif-diamonds" data-reveal aria-hidden="true">
+        <span class="dif-diamonds-line"></span>
+        <span class="dif-diamond sm"></span>
+        <span class="dif-diamond"></span>
+        <span class="dif-diamond sm"></span>
+        <span class="dif-diamonds-line"></span>
+      </div>
+      <div class="dif-title" data-reveal data-reveal-delay="1">
+        <span class="dif-title-gold">O QUE TORNA</span>
+        <span class="dif-title-white">CADA PIZZA</span>
+        <span class="dif-title-white">DIFERENTE</span>
+      </div>
+    </div>
+
+    <!-- grid 2x3 -->
+    <div class="dif-grid">
+
+      <!-- 1 Mais Leve -->
+      <div class="dif-card" data-reveal>
+        <svg class="dif-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2C8 2 5 6 5 10c0 5 7 12 7 12s7-7 7-12c0-4-3-8-7-8z"/>
+          <circle cx="12" cy="10" r="2"/>
+        </svg>
+        <div class="dif-line"></div>
+        <div class="dif-card-title">MAIS LEVE</div>
+        <p class="dif-card-desc">A fermentação quebra o glúten, deixando a massa mais leve, macia e de fácil digestão.</p>
+      </div>
+
+      <!-- 2 Mais Digestiva -->
+      <div class="dif-card" data-reveal data-reveal-delay="1">
+        <svg class="dif-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <div class="dif-line"></div>
+        <div class="dif-card-title">MAIS DIGESTIVA</div>
+        <p class="dif-card-desc">Maturação longa de 48h respeita o tempo certo — tempo que faz a diferença.</p>
+      </div>
+
+      <!-- 3 Aerada e Crocante -->
+      <div class="dif-card" data-reveal data-reveal-delay="2">
+        <svg class="dif-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2l2 7h7l-6 4 2 7-5-4-5 4 2-7-6-4h7z" stroke-linejoin="round"/>
+        </svg>
+        <div class="dif-line"></div>
+        <div class="dif-card-title">AERADA E<br>CROCANTE</div>
+        <p class="dif-card-desc">Assada em alta temperatura, fica aerada por dentro e crocante por fora.</p>
+      </div>
+
+      <!-- 4 Ingredientes Selecionados -->
+      <div class="dif-card" data-reveal data-reveal-delay="3">
+        <svg class="dif-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+        <div class="dif-line"></div>
+        <div class="dif-card-title">INGREDIENTES<br>SELECIONADOS</div>
+        <p class="dif-card-desc">Alta qualidade em cada ingrediente. Sabor que vem da escolha certa.</p>
+      </div>
+
+      <!-- 5 Selada a Vácuo -->
+      <div class="dif-card" data-reveal data-reveal-delay="4">
+        <svg class="dif-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="6" width="18" height="13" rx="2"/>
+          <path d="M3 10h18"/>
+          <path d="M8 6V4M16 6V4"/>
+        </svg>
+        <div class="dif-line"></div>
+        <div class="dif-card-title">SELADA A VÁCUO</div>
+        <p class="dif-card-desc">Preserva sabor, crocância e qualidade por até 3 meses congelada.</p>
+      </div>
+
+      <!-- 6 Sem Aditivos -->
+      <div class="dif-card" data-reveal data-reveal-delay="5">
+        <svg class="dif-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <div class="dif-line"></div>
+        <div class="dif-card-title">SEM ADITIVOS</div>
+        <p class="dif-card-desc">Só tempo e ingredientes de verdade. Feita com cuidado em cada detalhe.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- PROVA SOCIAL -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section id="prova-social" class="section-fullscreen">
+  <div class="prova-inner">
+    <div class="prova-header">
+      <div class="sec-header">
+        <div class="sec-eyebrow" data-reveal>
+          <span class="sec-eyebrow-line"></span>
+          DEPOIMENTOS
+          <span class="sec-eyebrow-line"></span>
+        </div>
+        <div class="sec-diamonds gold" data-reveal aria-hidden="true">
+          <span class="sec-diamonds-line"></span>
+          <span class="sec-diamond sm"></span>
+          <span class="sec-diamond"></span>
+          <span class="sec-diamond sm"></span>
+          <span class="sec-diamonds-line"></span>
+        </div>
+        <div class="sec-title" data-reveal data-reveal-delay="1">
+          <span class="sec-title-white">QUEM PROVA,</span>
+          <span class="sec-title-gold">VOLTA SEMPRE</span>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card" data-reveal>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"A massa é incrível! Super leve, crocante na borda e cheia de sabor. Nunca imaginei que uma pizza congelada pudesse ser assim."</p>
+        <div class="review-author">Ana Carolina S.</div>
+        <div class="review-location">São Paulo, SP</div>
+      </div>
+      <div class="review-card" data-reveal data-reveal-delay="1">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Comprei para ter no freezer e acabei pedindo mais duas caixas na semana seguinte. A Marguerita é simplesmente perfeita."</p>
+        <div class="review-author">Rafael M.</div>
+        <div class="review-location">Curitiba, PR</div>
+      </div>
+      <div class="review-card" data-reveal data-reveal-delay="2">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Sensação de pizza de pizzaria em casa. Fica pronta em minutos e não pesa no estômago. Virou rotina cá em casa!"</p>
+        <div class="review-author">Mariana P.</div>
+        <div class="review-location">Belo Horizonte, MG</div>
+      </div>
+    </div>
+    <div class="prova-numbers" data-reveal>
+      <div class="prova-num">
+        <span class="stat-num">500+</span>
+        <div class="stat-label">Clientes satisfeitos</div>
+      </div>
+      <div class="prova-num">
+        <span class="stat-num">5★</span>
+        <div class="stat-label">Avaliação média</div>
+      </div>
+      <div class="prova-num">
+        <span class="stat-num">100%</span>
+        <div class="stat-label">Satisfação garantida</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- CTA FINAL -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section id="cta" class="section-fullscreen">
+  <div class="cta-inner">
+    <div class="sec-header" data-reveal>
+      <div class="sec-eyebrow">
+        <span class="sec-eyebrow-line"></span>
+        FAÇA SEU PEDIDO
+        <span class="sec-eyebrow-line"></span>
+      </div>
+      <div class="sec-diamonds gold" aria-hidden="true">
+        <span class="sec-diamonds-line"></span>
+        <span class="sec-diamond sm"></span>
+        <span class="sec-diamond"></span>
+        <span class="sec-diamond sm"></span>
+        <span class="sec-diamonds-line"></span>
+      </div>
+    </div>
+    <h2 class="cta-title" data-reveal data-reveal-delay="1">
+      Pronto para sentir o sabor<br><em>que nasce do fogo?</em>
+    </h2>
+    <p class="cta-sub" data-reveal data-reveal-delay="2">
+      Faça seu pedido pelo WhatsApp agora. Entregas disponíveis e retirada em nosso ponto. Pizzas artesanais feitas para momentos especiais.
+    </p>
+    <div class="cta-buttons" data-reveal data-reveal-delay="3">
+      <a href="https://wa.me" class="btn-whatsapp" target="_blank" rel="noopener">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        FAZER MEU PEDIDO
+      </a>
+    </div>
+    <p class="cta-info" data-reveal data-reveal-delay="4">Pizzas artesanais · Feitas para momentos especiais · Qualidade e sabor que você sente em cada fatia</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <strong>Fermentare Pizzas</strong> · Fermentação Natural · Pizzas Congeladas · Feito com 🍕 e muito tempo</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('[data-reveal]');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav active state
+  const sections = document.querySelectorAll('.section-fullscreen');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => a.style.color = '');
+        const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+        if (active) active.style.color = 'var(--vermelho)';
+      }
+    });
+  }, { threshold: 0.5 });
+  sections.forEach(s => sectionObserver.observe(s));
+
+  // ── Menu mobile hamburguer ──────────────────────────────────
+  const hamburger = document.getElementById('hamburger');
+  const navMobile = document.getElementById('nav-mobile');
+  const mobileLinks = document.querySelectorAll('.nav-mobile-link');
+
+  function openMenu() {
+    hamburger.classList.add('open');
+    navMobile.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    navMobile.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  // Fechar ao clicar em qualquer link
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Fechar ao clicar fora (no overlay)
+  navMobile.addEventListener('click', (e) => {
+    if (e.target === navMobile) closeMenu();
+  });
+
+  // Fechar com ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+</script>
+</body>
+</html>
